@@ -91,12 +91,12 @@ nav {
   z-index: 10;
 }
 
-nav-container {
+nav .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-nav .search-bar {
+.search-bar {
   background-color: var(--color-light);
   border-radius: var(--border-radius);
   padding: var(--search-padding);
@@ -108,7 +108,7 @@ nav .search-bar input[type="search"] {
   margin-left: 1rem;
   font-size: 0.9rem;
   color: var(--color-dark);
-  display: inline-block;
+ 
 }
 
 nav .search-bar input[type="search"]::placeholder {
@@ -317,22 +317,22 @@ main .container .left .profile {
   z-index: 2;
 }
 .middle .stories .story:nth-child(1) {
-  background: url(images/story-1.jpg) no-repeat center center/cover;
+  background: url(2.jpg) no-repeat center center/cover;
 }
 .middle .stories .story:nth-child(2) {
-  background: url(images/story-2.jpg) no-repeat center center/cover;
+  background: url(1.jpg) no-repeat center center/cover;
 }
 .middle .stories .story:nth-child(3) {
-  background: url(images/story-3.jpg) no-repeat center center/cover;
+  background: url(3.jpg) no-repeat center center/cover;
 }
 .middle .stories .story:nth-child(4) {
-  background: url(images/story-4.jpg) no-repeat center center/cover;
+  background: url(4.jpg) no-repeat center center/cover;
 }
 .middle .stories .story:nth-child(5) {
-  background: url(images/story-5.jpg) no-repeat center center/cover;
+  background: url(5.jpg) no-repeat center center/cover;
 }
 .middle .stories .story:nth-child(6) {
-  background: url(images/story-6.jpg) no-repeat center center/cover;
+  background: url(7.jpg) no-repeat center center/cover;
 }
 
 .middle .story .profile-photo {
@@ -378,12 +378,12 @@ main .container .left .profile {
   justify-content: space-between;
 }
 
-.middle .feed .user{
+.middle .feed .user {
   display: flex;
   gap: 1rem;
 }
 
-.middle .feed .photo{
+.middle .feed .photo {
   border-radius: var(--card-border-radius);
   overflow: hidden;
   margin: 0.7rem 0;
@@ -392,4 +392,56 @@ main .container .left .profile {
 .middle .feed .action-buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  margin: 0.6rem;
+}
+
+.middle .liked-by {
+  display: flex;
+}
+.middle .liked-by span {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-white);
+  margin-left: -0.6rem;
+}
+
+.middle .liked-by span:first-child {
+  margin: 0;
+}
+.middle .liked-by p {
+  margin-left: 0.5rem;
+}
+
+main .container .right {
+  height: max-content;
+  position: sticky;
+  top: var(--sticky-top-right);
+  bottom: 0;
+}
+.right .messages {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+}
+
+.right .messages .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.right .messages i {
+  font-size: 1.4rem;
+}
+
+.right .messages .search-bar{
+  display: flex;
+
+  margin-bottom: 1rem;
 }
