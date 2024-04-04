@@ -215,12 +215,17 @@ section .cards .card {
 
 
 @media (max-width:1200px) {
-    .cont{
+  nav{
+    display: none;
+  }  
+  
+  
+  .cont{
       display: block;
       
     }
     .left{
-      margin-top: 20rem;
+      margin-top: 5rem;
       margin-left: 5rem;
     }
     .right img{
@@ -230,7 +235,7 @@ section .cards .card {
       
     }
     .at{
-      margin-left: 20px;
+      margin-left: 38px;
     }
     
 
