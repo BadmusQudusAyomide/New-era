@@ -1,0 +1,23 @@
+/* #search{
+    border: 2px solid red;
+    align-items: center;
+    border-radius: 50px;
+    margin-left: 50px;
+    padding-left: 40px ;
+    padding-top: 10px ;
+    padding-right: 40px;
+    margin-top: 10px;
+} */
+.cont{
+    background-color: blueviolet;
+    height: 15rem;
+    border-radius: 20px;
+}
+.amount{
+    margin-left: 20px;
+    position: absolute;
+    font-size: 2rem;
+}
+span{
+    bottom:0 ;
+}

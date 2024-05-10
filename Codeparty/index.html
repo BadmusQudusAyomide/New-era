@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+ 
+    <style>
+        body {
+    font-family: sans-serif;
+}
+
+#todo-container {
+    border: 1px solid #ddd;
+    padding: 1rem;
+}
+
+#add-todo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#new-task, #task-time {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    margin-right: 1rem;
+}
+
+#add-btn {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+#clear-all {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #f00;
+    color: white;
+    border: none;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>To-Do List</h1>
+    <div id="todo-container">
+        <div id="add-todo">
+            <input type="text" id="new-task" placeholder="Enter your task">
+            <input type="datetime-local" id="task-time">
+            <button id="add-btn">Add</button>
+        </div>
+        <ul id="todo-list"></ul>
+        <button id="clear-all">Clear All</button>
+    </div>
+    <script>
+
+     const todoList = document.getElementById('todo-list');
+        const addBtn = document.getElementById('add-btn');
+        const newTask = document.getElementById('new-task');
+        const taskTime = document.getElementById('task-time');
+        const clearAllBtn = document.getElementById('clear-all');
+
+        function getTodosFromStorage() {
+            const todosString = localStorage.getItem('todos');
+            return todosString ? JSON.parse(todosString) : [];
+        }
+
+        function setTodosToStorage(todos) {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function displayTodos() {
+            const todos = getTodosFromStorage();
+            todoList.innerHTML = ''; // Clear existing list
+            todos.forEach(todo => {
+                const listItem = document.createElement('li');
+                const taskText = document.createElement('span');
+                const timeSpan = document.createElement('span');
+                const closeBtn = document.createElement('button');
+
+                taskText.innerText = todo.task;
+                timeSpan.innerText = `Due: ${todo.time}`;
+                closeBtn.innerText = 'X';
+                listItem.classList.add(todo.completed ? 'completed' : '');
+
+                closeBtn.addEventListener('click', () => {
+                    const newTodos = todos.filter(t => t !== todo);
+                    setTodosToStorage(newTodos);
+                    displayTodos();
+                });
+
+                listItem.addEventListener('click', () => {
+                    todo.completed = !todo.completed;
+                    setTodosToStorage(todos);
+                    displayTodos();
+                });
+
+                if (new Date(todo.time) < new Date()) {
+                    listItem.style.backgroundColor = '#f00'; // highlight overdue tasks
+                }
+
+                listItem.appendChild(taskText);
+                listItem.appendChild(timeSpan);
+                listItem.appendChild(closeBtn);
+                todoList.appendChild(listItem);
+            });
+        }
+
+        addBtn.addEventListener('click', () => {
+            const task = newTask.value.trim(); // Trim whitespace
+            if (!task || !taskTime.value) { // Check for empty task or time
+                alert('Please enter a task and time');
+                return;
+            }
+            const newTodo = {
+                task: task,
+                time: taskTime.value,
+                completed: false
+            };
+            const todos = getTodosFromStorage();
+            todos.push(newTodo);
+            setTodosToStorage(todos);
+            newTask.value = ''; // Clear input field
+            taskTime.value = ''; // Clear time input
+            displayTodos();
+        });
+
+        clearAllBtn.addEventListener('click', () => {
+            localStorage.removeItem('todos');
+            displayTodos();
+        });
+
+        displayTodos(); // Call on page load to display existing tasks
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+HTTrack3.49-2+htsswf+htsjava launched on Sat, 13 Apr 2024 23:25:34 at https://englobaleducation.co.uk/ none ..zip
+(winhttrack https://englobaleducation.co.uk/ -W -O "C:\Users\DELL\Desktop\Badmus Qudus Ayomide\New era/mayowa" -P none:yes -%v none ..zip )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+23:25:56	Warning: 	Retry after error -5 (error:00000005:lib(0):func(0):DH lib) at link https://englobaleducation.co.uk/ (from primary/primary)
+23:25:58	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link none/robots.txt (from primary/primary)
+23:25:58	Warning: 	Retry after error -5 (Unable to get server's address: No such host is known. ) at link none/ (from primary/primary)
+23:26:03	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link ..zip/robots.txt (from primary/primary)
+23:26:03	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link ..zip/ (from primary/primary)
+23:26:06	Warning: 	Retry after error -4 (No data (connection closed)) at link https://englobaleducation.co.uk/ (from primary/primary)
+23:26:08	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link none/ (from primary/primary)
+23:26:10	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link ..zip/ (from primary/primary)

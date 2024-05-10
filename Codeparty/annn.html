@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input[type="text"], input[type="datetime-local"], button {
+    margin-bottom: 10px;
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task {
+    margin-bottom: 5px;
+}
+
+.done {
+    text-decoration: line-through;
+    color: grey;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>To-Do App</h1>
+    <div class="container">
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <input type="datetime-local" id="deadlineInput">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+    // Load tasks from cookies when the page loads
+    window.onload = function () {
+        loadTasks();
+    };
+
+    // Function to add a new task
+    function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var deadlineInput = document.getElementById("deadlineInput");
+
+        var task = taskInput.value;
+        var deadline = deadlineInput.value;
+
+        if (task.trim() === "" || deadline.trim() === "") {
+            alert("Please enter both a task and a deadline!");
+            return;
+        }
+
+        var taskObject = {
+            task: task,
+            deadline: deadline,
+            done: false
+        };
+
+        saveTask(taskObject);
+        displayTasks();
+
+        taskInput.value = "";
+        deadlineInput.value = "";
+    }
+
+    // Function to save task to cookies
+    function saveTask(taskObject) {
+        var tasks = JSON.parse(getCookie("tasks") || "[]");
+        tasks.push(taskObject);
+        document.cookie = "tasks=" + JSON.stringify(tasks);
+    }
+
+    // Function to load tasks from cookies
+    function loadTasks() {
+        var tasks = JSON.parse(getCookie("tasks") || "[]");
+        tasks.forEach(function (task) {
+            displayTask(task);
+        });
+    }
+
+    // Function to display tasks
+    function displayTasks() {
+        clearTaskList();
+        loadTasks();
+    }
+
+    // Function to display a single task
+    function displayTask(taskObject) {
+        var taskList = document.getElementById("taskList");
+        var taskItem = document.createElement("li");
+        taskItem.className = "task";
+        if (taskObject.done) {
+            taskItem.className += " done";
+        }
+        taskItem.innerHTML = taskObject.task + " - Deadline: " + taskObject.deadline;
+        taskList.appendChild(taskItem);
+    }
+
+    // Function to clear task list
+    function clearTaskList() {
+        var taskList = document.getElementById("taskList");
+        taskList.innerHTML = "";
+    }
+
+    // Function to get cookie by name
+    function getCookie(name) {
+        var cookieArr = document.cookie.split("; ");
+        for (var i = 0; i < cookieArr.length; i++) {
+            var cookiePair = cookieArr[i].split("=");
+            if (cookiePair[0] === name) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+
+    </script>
+</body>
+
+</html>

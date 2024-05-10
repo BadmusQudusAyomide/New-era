@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-task {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add-task input[type="text"],
+        .add-task input[type="datetime-local"] {
+            flex: 1;
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-task button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-task button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task {
+            position: relative;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .task:hover {
+            background-color: #f0f0f0;
+        }
+
+        .task.done {
+            background-color: #d4edda;
+        }
+
+        .task.expired {
+            background-color: #f8d7da;
+        }
+
+        .task .delete-task {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #cc0000;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .task:hover .delete-task {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .task.animated {
+            animation: slideIn 0.5s ease, fadeIn 0.5s ease;
+        } */
+
+
+ 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .add-task {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .add-task input[type="text"],
+    .add-task input[type="datetime-local"] {
+      flex: 1;
+      margin-right: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .add-task button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-task button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task {
+      position: relative;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .task:hover {
+      background-color: #f0f0f0;
+    }
+
+    .task.done {
+      background-color: #d4edda;
+    }
+
+    .task.expired {
+      background-color: #f8d7da;
+    }
+
+    .task .delete-task {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #cc0000;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .task:hover .delete-task {
+      opacity: 1;
+    }
+
+    .checkmark {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #007bff;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .task.done .checkmark {
+      opacity: 1;
+    }
+
+    .task.done .checkmark::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To-Do App</h1>
+        <div class="add-task">
+            <input type="text" id="taskInput" placeholder="Add new task">
+            <input type="datetime-local" id="taskDeadline">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskDeadline = document.getElementById("taskDeadline");
+            var taskList = document.getElementById("taskList");
+
+            var task = taskInput.value.trim();
+            var deadline = new Date(taskDeadline.value);
+
+            if (task === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var taskItem = document.createElement("li");
+            taskItem.className = "task animated";
+            taskItem.innerHTML = `
+                <span>${task} - Deadline: ${deadline.toLocaleString()}</span>
+                <span class="delete-task" onclick="deleteTask(this)">X</span>
+            `;
+
+            var currentTime = new Date();
+            if (deadline < currentTime) {
+                taskItem.classList.add("expired");
+            }
+
+            taskItem.addEventListener("click", function () {
+                if (taskItem.classList.contains("done")) {
+                    taskItem.classList.remove("done");
+                } else {
+                    taskItem.classList.add("done");
+                }
+            });
+
+            taskList.appendChild(taskItem);
+
+            taskInput.value = "";
+            taskDeadline.value = "";
+        }
+
+        function deleteTask(element) {
+            var taskItem = element.parentNode;
+            taskItem.remove();
+        }
+    </script>
+</body>
+
+</html>

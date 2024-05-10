@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-task input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: calc(100% - 100px);
+}
+
+.add-task button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.add-task button:hover {
+    background-color: #0056b3;
+}
+
+.task {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.task.done {
+    background-color: #d4edda;
+}
+
+.task.expired {
+    background-color: #f8d7da;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To-Do App</h1>
+        <div class="add-task">
+            <input type="text" id="taskInput" placeholder="Add new task">
+            <input type="datetime-local" id="taskDeadline">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+    function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var taskDeadline = document.getElementById("taskDeadline");
+        var taskList = document.getElementById("taskList");
+
+        var task = taskInput.value.trim();
+        var deadline = new Date(taskDeadline.value);
+
+        if (task === "") {
+            alert("Please enter a task.");
+            return;
+        }
+
+        var taskItem = document.createElement("li");
+        taskItem.className = "task";
+        taskItem.innerHTML = task + " - Deadline: " + deadline.toLocaleString();
+
+        var currentTime = new Date();
+        if (deadline < currentTime) {
+            taskItem.classList.add("expired");
+        }
+
+        taskItem.addEventListener("click", function () {
+            if (taskItem.classList.contains("done")) {
+                taskItem.classList.remove("done");
+            } else {
+                taskItem.classList.add("done");
+            }
+        });
+
+        taskList.appendChild(taskItem);
+
+        taskInput.value = "";
+        taskDeadline.value = "";
+    }
+
+
+    </script>
+</body>
+
+</html>
